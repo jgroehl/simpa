@@ -10,8 +10,8 @@ from simpa.io_handling import load_data_field, load_hdf5
 from simpa.core.device_digital_twins import DigitalDeviceTwinBase, PhotoacousticDevice
 from simpa.utils import Settings, Tags
 
-from ipasc_tool import BaseAdapter, MetaDatum, DeviceMetaDataCreator, DetectionElementCreator, MetadataAcquisitionTags
-from ipasc_tool.iohandler import write_data as write_ipasc_data
+from pacfish import BaseAdapter, MetaDatum, DeviceMetaDataCreator, DetectionElementCreator, MetadataAcquisitionTags
+from pacfish.iohandler import write_data as write_ipasc_data
 
 
 class IpascSimpaAdapter(BaseAdapter):
