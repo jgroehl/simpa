@@ -35,6 +35,11 @@ class TissueLibrary(object):
                                                                 CONSTANT_ANISOTROPY_ARBITRARY(g)))
                 .get_molecular_composition(SegmentationClasses.GENERIC))
 
+    def water(self):
+        return (MolecularCompositionGenerator()
+                .append(MOLECULE_LIBRARY.water(1.0))
+                .get_molecular_composition(SegmentationClasses.WATER))
+
     def muscle(self, background_oxy=None, blood_volume_fraction=None):
         """
 

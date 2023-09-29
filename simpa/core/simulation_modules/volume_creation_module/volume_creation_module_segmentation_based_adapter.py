@@ -3,11 +3,12 @@
 # SPDX-License-Identifier: MIT
 
 from simpa.core.simulation_modules.volume_creation_module import VolumeCreatorModuleBase
-from simpa.utils import Tags
 from simpa.utils.tissue_properties import TissueProperties
 from simpa.io_handling import save_hdf5
-import h5py
+from simpa.utils import Tags
 import numpy as np
+import torch
+import h5py
 
 
 class SegmentationBasedVolumeCreationAdapter(VolumeCreatorModuleBase):
@@ -47,7 +48,9 @@ class SegmentationBasedVolumeCreationAdapter(VolumeCreatorModuleBase):
                     volumes[prop_tag][segmentation_volume == seg_class] = class_properties[prop_tag]
                 elif len(np.shape(class_properties[prop_tag])) == 3: # 3D map
                     volumes[prop_tag][segmentation_volume == seg_class] = \
-                        class_properties[prop_tag][segmentation_volume == seg_class]
+                        torch.as_tensor(class_properties[prop_tag][segmentation_volume == seg_class],
+                                        dtype=torch.float, device=self.torch_device)
+
                 else:
                     raise AssertionError("Properties need to either be a scalar or a 3D map.")
 
