@@ -14,6 +14,7 @@ docs/searchindex.js
 docs/objects.inv
 
 simpa_tests/figures
+figures/*
 simpa_tests/figures/*
 simpa_tests/**/figures
 simpa_tests/**/figures/*

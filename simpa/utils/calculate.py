@@ -21,7 +21,7 @@ def calculate_oxygenation(molecule_list):
             hbO2 = molecule.volume_fraction
 
     if hb is None and hbO2 is None:
-        return None
+        return -1
 
     if hb is None:
         hb = 0
@@ -30,10 +30,10 @@ def calculate_oxygenation(molecule_list):
 
     if isinstance(hb, np.ndarray) or isinstance(hbO2, np.ndarray):
         if (hb + hbO2 < 1e-10).any():  # negative values are not allowed and division by (approx) zero
-            return None                # will lead to negative side effects.
+            return np.zeros_like(hbO2) - 1                # will lead to negative side effects.
     else:
         if hb + hbO2 < 1e-10:
-            return None
+            return -1
 
     return hbO2 / (hb + hbO2)
 
