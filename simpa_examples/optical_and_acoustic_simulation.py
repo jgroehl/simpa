@@ -170,7 +170,7 @@ device.set_detection_geometry(sp.LinearArrayDetectionGeometry(device_position_mm
                                                               pitch_mm=0.25,
                                                               number_detector_elements=100,
                                                               field_of_view_extent_mm=np.asarray([-15, 15, 0, 0, 0, 20])))
-print(device.get_detection_geometry().get_detector_element_positions_base_mm())
+
 device.add_illumination_geometry(sp.SlitIlluminationGeometry(slit_vector_mm=[100, 0, 0]))
 
 
