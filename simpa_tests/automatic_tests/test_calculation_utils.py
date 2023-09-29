@@ -20,13 +20,13 @@ class TestCalculationUtils(unittest.TestCase):
         mcg = MolecularCompositionGenerator()
         mcg.append(MOLECULE_LIBRARY.fat(1.0))
         oxy_value = calculate_oxygenation(mcg.get_molecular_composition(segmentation_type=SegmentationClasses.GENERIC))
-        assert oxy_value is None
+        assert oxy_value == -1
 
         mcg = MolecularCompositionGenerator()
         mcg.append(MOLECULE_LIBRARY.fat(1.0))
         mcg.append(MOLECULE_LIBRARY.oxyhemoglobin(0.0))
         oxy_value = calculate_oxygenation(mcg.get_molecular_composition(segmentation_type=SegmentationClasses.GENERIC))
-        assert oxy_value is None
+        assert oxy_value == -1
 
         # FULLY OXYGENATED CASES:
         mcg = MolecularCompositionGenerator()
