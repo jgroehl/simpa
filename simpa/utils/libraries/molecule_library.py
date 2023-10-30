@@ -201,27 +201,27 @@ class Molecule(SerializableSIMPAClass, object):
         if gruneisen_parameter is None:
             gruneisen_parameter = calculate_gruneisen_parameter_from_temperature(
                 StandardProperties.BODY_TEMPERATURE_CELCIUS)
-        if not isinstance(gruneisen_parameter, (int, float)):
+        if not isinstance(gruneisen_parameter, (int, float, np.ndarray)):
             raise TypeError(f"The given gruneisen_parameter was not of type int or float instead "
                             f"of {type(gruneisen_parameter)}!")
         self.gruneisen_parameter = gruneisen_parameter
 
         if density is None:
             density = StandardProperties.DENSITY_GENERIC
-        if not isinstance(density, (np.int32, np.int64, int, float)):
+        if not isinstance(density, (np.int32, np.int64, int, float, np.ndarray)):
             raise TypeError(f"The given density was not of type int or float instead of {type(density)}!")
         self.density = density
 
         if speed_of_sound is None:
             speed_of_sound = StandardProperties.SPEED_OF_SOUND_GENERIC
-        if not isinstance(speed_of_sound, (np.int32, np.int64, int, float)):
+        if not isinstance(speed_of_sound, (np.int32, np.int64, int, float, np.ndarray)):
             raise TypeError("The given speed_of_sound was not of type int or float instead of {}!"
                             .format(type(speed_of_sound)))
         self.speed_of_sound = speed_of_sound
 
         if alpha_coefficient is None:
             alpha_coefficient = StandardProperties.ALPHA_COEFF_GENERIC
-        if not isinstance(alpha_coefficient, (int, float)):
+        if not isinstance(alpha_coefficient, (int, float, np.ndarray)):
             raise TypeError("The given alpha_coefficient was not of type int or float instead of {}!"
                             .format(type(alpha_coefficient)))
         self.alpha_coefficient = alpha_coefficient
