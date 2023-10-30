@@ -60,7 +60,7 @@ class VolumeCreatorModuleBase(SimulationModule):
         # explicitly empty cache to free reserved GPU memory after volume creation
         torch.cuda.empty_cache()
 
-        if not (Tags.IGNORE_QA_ASSERTIONS in self.global_settings and Tags.IGNORE_QA_ASSERTIONS):
+        if not (Tags.IGNORE_QA_ASSERTIONS in self.global_settings and self.global_settings[Tags.IGNORE_QA_ASSERTIONS]):
             assert_equal_shapes(list(volumes.values()))
             for _volume_name in volumes.keys():
                 if _volume_name == Tags.DATA_FIELD_OXYGENATION:
@@ -69,5 +69,5 @@ class VolumeCreatorModuleBase(SimulationModule):
                 assert_array_well_defined(volumes[_volume_name], array_name=_volume_name)
 
         for key, value in volumes.items():
-            save_data_field(value, self.global_settings[Tags.SIMPA_OUTPUT_PATH],
+            save_data_field(value.cpu().numpy(), self.global_settings[Tags.SIMPA_OUTPUT_PATH],
                             data_field=key, wavelength=self.global_settings[Tags.WAVELENGTH])
