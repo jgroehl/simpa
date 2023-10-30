@@ -81,7 +81,7 @@ class OpticalForwardModuleBase(SimulationModule):
                                          scattering=scattering,
                                          anisotropy=anisotropy)
         fluence = results[Tags.DATA_FIELD_FLUENCE]
-        if not (Tags.IGNORE_QA_ASSERTIONS in self.global_settings and Tags.IGNORE_QA_ASSERTIONS):
+        if not (Tags.IGNORE_QA_ASSERTIONS in self.global_settings and self.global_settings[Tags.IGNORE_QA_ASSERTIONS]):
             assert_array_well_defined(fluence, assume_non_negativity=True, array_name="fluence")
 
         if Tags.LASER_PULSE_ENERGY_IN_MILLIJOULE in self.component_settings:
@@ -95,7 +95,7 @@ class OpticalForwardModuleBase(SimulationModule):
             units = Tags.UNITS_ARBITRARY
             initial_pressure = absorption * fluence
 
-        if not (Tags.IGNORE_QA_ASSERTIONS in self.global_settings and Tags.IGNORE_QA_ASSERTIONS):
+        if not (Tags.IGNORE_QA_ASSERTIONS in self.global_settings and self.global_settings[Tags.IGNORE_QA_ASSERTIONS]):
             assert_array_well_defined(initial_pressure, assume_non_negativity=True, array_name="initial_pressure")
 
         results[Tags.DATA_FIELD_FLUENCE] = fluence

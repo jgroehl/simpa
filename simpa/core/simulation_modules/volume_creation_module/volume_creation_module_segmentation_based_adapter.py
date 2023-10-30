@@ -54,6 +54,10 @@ class SegmentationBasedVolumeCreationAdapter(VolumeCreatorModuleBase):
                 else:
                     raise AssertionError("Properties need to either be a scalar or a 3D map.")
 
+        # convert volumes back to CPU
+        for key in volumes.keys():
+            volumes[key] = volumes[key].cpu().numpy().astype(np.float64, copy=False)
+
         save_hdf5(self.global_settings, self.global_settings[Tags.SIMPA_OUTPUT_PATH], "/settings/")
 
         return volumes
